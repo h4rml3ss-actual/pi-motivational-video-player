@@ -26,11 +26,22 @@ def main():
         print(f"Configuration validation error: {e.message}", file=sys.stderr)
         sys.exit(1)
 
+    # Determine video directories (allow override via CLI, expand user and vars)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="VideoWall playback launcher")
+    parser.add_argument('-d', '--dirs', nargs='+', metavar='DIR',
+                        help='override video directories from config')
+    args = parser.parse_args()
+
+    raw_dirs = args.dirs if args.dirs is not None else config.get('video_dirs', [])
+    video_dirs = [os.path.expandvars(os.path.expanduser(d)) for d in raw_dirs]
+
     # Build mpv command
     mpv_cmd = [
         'mpv', '--fullscreen',
         '--script=' + os.path.join(os.path.expanduser('~/.config/videowall'), 'player.lua')
-    ] + config.get('video_dirs', [])
+    ] + video_dirs
     os.execvp(mpv_cmd[0], mpv_cmd)
 
 if __name__ == "__main__":

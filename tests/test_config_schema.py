@@ -1,7 +1,11 @@
 import json
 import os
 import pytest
-from jsonschema import validate, ValidationError
+
+try:
+    from jsonschema import validate, ValidationError
+except ImportError:
+    pytest.skip("jsonschema not installed, skipping config schema tests", allow_module_level=True)
 
 # Load schema
 schema_path = os.path.join(os.path.dirname(__file__), '..', 'docs', 'config-schema.json')

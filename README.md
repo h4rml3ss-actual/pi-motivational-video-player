@@ -43,8 +43,13 @@ bin/videowall-launcher
 ```
 
 ### Start playback
+
 ```bash
+# Play videos from profile-defined directories
 bin/videowall
+
+# Or override video directories on the command line
+bin/videowall --dirs /path/to/videos /other/videos
 ```
 
 All configuration and profiles live under `~/.config/videowall`.  Playback parameters are validated against the JSON schema in `docs/config-schema.json`.
