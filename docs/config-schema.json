@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VideoWall Configuration Schema",
+  "type": "object",
+  "properties": {
+    "name": {"type": "string"},
+    "video_dirs": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "playlist_mode": {"type": "string", "enum": ["random", "ordered"]},
+    "effects": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "messages": {
+      "type": "object",
+      "properties": {
+        "message_file": {"type": "string"},
+        "interval": {"type": "number"},
+        "duration": {"type": "number"}
+      },
+      "required": ["message_file"],
+      "additionalProperties": false
+    },
+    "fonts": {
+      "type": "object",
+      "properties": {
+        "primary": {"type": "string"},
+        "fallback": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["primary"],
+      "additionalProperties": false
+    },
+    "hud": {
+      "type": "object",
+      "properties": {
+        "modules": {"type": "array", "items": {"type": "string"}},
+        "position": {"type": "string", "enum": ["top", "bottom", "left", "right"]}
+      },
+      "required": ["modules"],
+      "additionalProperties": false
+    },
+    "aspect": {"type": "string", "enum": ["4:3", "16:9", "stretch"]}
+  },
+  "required": ["name", "video_dirs"],
+  "additionalProperties": false
+}

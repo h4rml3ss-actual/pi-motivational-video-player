@@ -1,0 +1,20 @@
+{
+  "name": "Pure VHS",
+  "video_dirs": ["~/media/videos"],
+  "playlist_mode": "random",
+  "effects": ["vhs-clean"],
+  "messages": {
+    "message_file": "~/.config/videowall/messages/default.txt",
+    "interval": 30,
+    "duration": 5
+  },
+  "fonts": {
+    "primary": "DejaVu Sans Mono",
+    "fallback": []
+  },
+  "hud": {
+    "modules": ["clock","cpu","mem","net","uptime"],
+    "position": "bottom"
+  },
+  "aspect": "4:3"
+}

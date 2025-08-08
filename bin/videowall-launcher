@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+"""
+ncurses-based UI for editing and selecting VideoWall profiles.
+"""
+import sys
+import os
+import curses
+import shutil
+
+def main():
+    """Launcher UI main function."""
+    # Ensure config directories exist
+    config_dir = os.path.expanduser('~/.config/videowall')
+    profiles_dir = os.path.join(config_dir, 'profiles')
+    os.makedirs(profiles_dir, exist_ok=True)
+
+    # Load and display profiles
+    profiles = [f for f in os.listdir(profiles_dir) if f.endswith('.json')]
+    if not profiles:
+        print(f"No profiles found in {profiles_dir}", file=sys.stderr)
+        sys.exit(1)
+
+    # Simple curses menu to select profile
+    def curses_menu(stdscr):
+        curses.curs_set(0)
+        sel = 0
+        while True:
+            stdscr.clear()
+            stdscr.addstr(0, 0, 'Select profile:')
+            for i, p in enumerate(profiles):
+                marker = '>' if i == sel else ' '
+                stdscr.addstr(i+2, 0, f"{marker} {p}")
+            key = stdscr.getch()
+            if key in (curses.KEY_UP, ord('k')):
+                sel = (sel - 1) % len(profiles)
+            elif key in (curses.KEY_DOWN, ord('j')):
+                sel = (sel + 1) % len(profiles)
+            elif key in (ord('\n'), ord(' ')):
+                break
+        # Copy chosen profile to config.json
+        cfg = os.path.join(profiles_dir, profiles[sel])
+        dest = os.path.join(config_dir, 'config.json')
+        shutil.copy(cfg, dest)
+        stdscr.addstr(len(profiles)+4, 0, f"Profile '{profiles[sel]}' selected.")
+        stdscr.getch()
+
+    curses.wrapper(curses_menu)
+
+if __name__ == "__main__":
+    sys.exit(main())

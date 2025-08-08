@@ -1,0 +1,3 @@
+# Sample messages (one per line)
+Hello, world!
+Stay retro.

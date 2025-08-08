@@ -1,0 +1,20 @@
+{
+  "name": "Cyberpunk HUD",
+  "video_dirs": ["~/media/videos"],
+  "playlist_mode": "ordered",
+  "effects": ["cyberpunk-glow"],
+  "messages": {
+    "message_file": "~/.config/videowall/messages/default.txt",
+    "interval": 60,
+    "duration": 7
+  },
+  "fonts": {
+    "primary": "JetBrains Mono",
+    "fallback": ["Noto Sans"]
+  },
+  "hud": {
+    "modules": ["clock","cpu","mem","net","uptime"],
+    "position": "top"
+  },
+  "aspect": "16:9"
+}
