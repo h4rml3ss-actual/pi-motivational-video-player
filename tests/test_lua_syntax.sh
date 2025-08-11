@@ -6,6 +6,7 @@ echo "Checking Lua syntax..."
 for f in \
     core/player.lua \
     core/hud/modules/*.lua \
+    *.lua \
 ; do
     luac -p "$f"
 done
