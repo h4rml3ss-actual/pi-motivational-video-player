@@ -5,7 +5,6 @@ import json
 import os
 import tempfile
 import pytest
-from unittest.mock import patch, mock_open
 import sys
 
 # Add bin directory to path for importing modules

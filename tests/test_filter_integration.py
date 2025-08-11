@@ -5,7 +5,6 @@ import os
 import tempfile
 import subprocess
 import pytest
-from pathlib import Path
 
 
 class TestFilterIntegration:
@@ -207,7 +206,8 @@ class TestFilterIntegration:
                         shader_name = shader_ref.replace("../shaders/", "")
                         assert (
                             shader_name in available_shaders
-                        ), f"{preset_file}:{line_num} references non-existent shader: {shader_name}"
+                        ), (f"{preset_file}:{line_num} references "
+                            f"non-existent shader: {shader_name}")
 
     def test_filter_application_with_test_video(self, temp_config_dir, project_root):
         """Test that filters can be applied to a test video without errors."""
@@ -328,7 +328,8 @@ class TestFilterIntegration:
                                 # Verify that referenced effect exists as a filter preset
                                 assert (
                                     effect in available_filters
-                                ), f"Profile {profile_file} references non-existent filter: {effect}"
+                                ), (f"Profile {profile_file} references "
+                                    f"non-existent filter: {effect}")
 
             except json.JSONDecodeError:
                 pytest.fail(f"Profile {profile_file} contains invalid JSON")

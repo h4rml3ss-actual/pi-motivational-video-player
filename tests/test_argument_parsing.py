@@ -2,12 +2,9 @@
 Tests for argument parsing in VideoWall executables.
 """
 import os
-import sys
 import tempfile
 import pytest
 import subprocess
-from unittest.mock import patch, MagicMock
-from io import StringIO
 
 
 class TestVideoWallArgumentParsing:
@@ -161,7 +158,6 @@ class TestVideoWallArgumentParsing:
     def test_config_loading_error_handling(self):
         """Test error handling for configuration loading."""
         import json
-        from jsonschema import ValidationError
 
         # Test JSON decode error handling
         with pytest.raises(json.JSONDecodeError):
