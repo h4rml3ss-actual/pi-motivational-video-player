@@ -1,0 +1,53 @@
+# Pre-commit hooks for VideoWall project code quality
+repos:
+  # Local hooks using project-specific scripts
+  - repo: local
+    hooks:
+      # Lua syntax checking using existing test script
+      - id: lua-syntax-check
+        name: Lua Syntax Check
+        entry: tests/test_lua_syntax.sh
+        language: system
+        files: \.lua$
+        pass_filenames: false
+
+      # JSON schema validation for configuration files
+      - id: json-schema-validation
+        name: JSON Schema Validation
+        entry: python
+        args: [-c, "import sys, json, jsonschema; schema=json.load(open('docs/config-schema.json')); [jsonschema.validate(json.load(open(f)), schema) for f in sys.argv[1:]]"]
+        language: python
+        files: ^presets/.*\.json$
+        additional_dependencies: [jsonschema]
+
+  # Python code quality hooks
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        name: Python Code Formatting
+        language_version: python3
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        name: Python Linting
+        args: [--max-line-length=88, --extend-ignore=E203]
+
+  # Additional useful hooks for general code quality
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Trim Trailing Whitespace
+      - id: end-of-file-fixer
+        name: Fix End of Files
+      - id: check-yaml
+        name: Check YAML Syntax
+      - id: check-json
+        name: Check JSON Syntax
+      - id: check-merge-conflict
+        name: Check for Merge Conflicts
+      - id: check-executables-have-shebangs
+        name: Check Executables Have Shebangs

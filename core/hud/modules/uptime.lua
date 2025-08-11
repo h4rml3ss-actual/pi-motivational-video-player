@@ -10,7 +10,7 @@ function uptime.get()
     if not f then return "uptime N/A" end
     local content = f:read("*l")
     f:close()
-    local secs = tonumber(content:match("^(%d+\.?%d*)")) or 0
+    local secs = tonumber(content:match("^(%d+%.?%d*)")) or 0
     local days = math.floor(secs / 86400)
     secs = secs % 86400
     local hrs = math.floor(secs / 3600)

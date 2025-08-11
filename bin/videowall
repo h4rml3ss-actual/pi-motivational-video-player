@@ -5,6 +5,7 @@ Main launcher entry point for VideoWall.
 import sys
 import os
 
+
 def main():
     """Launcher main function."""
     # Load and validate config
@@ -12,7 +13,9 @@ def main():
     from jsonschema import validate, ValidationError
 
     config_path = os.path.expanduser("~/.config/videowall/config.json")
-    schema_path = os.path.join(os.path.dirname(__file__), '..', 'docs', 'config-schema.json')
+    schema_path = os.path.join(
+        os.path.dirname(__file__), "..", "docs", "config-schema.json"
+    )
     try:
         with open(schema_path) as f:
             schema = json.load(f)
@@ -30,19 +33,27 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description="VideoWall playback launcher")
-    parser.add_argument('-d', '--dirs', nargs='+', metavar='DIR',
-                        help='override video directories from config')
+    parser.add_argument(
+        "-d",
+        "--dirs",
+        nargs="+",
+        metavar="DIR",
+        help="override video directories from config",
+    )
     args = parser.parse_args()
 
-    raw_dirs = args.dirs if args.dirs is not None else config.get('video_dirs', [])
+    raw_dirs = args.dirs if args.dirs is not None else config.get("video_dirs", [])
     video_dirs = [os.path.expandvars(os.path.expanduser(d)) for d in raw_dirs]
 
     # Build mpv command
     mpv_cmd = [
-        'mpv', '--fullscreen',
-        '--script=' + os.path.join(os.path.expanduser('~/.config/videowall'), 'player.lua')
+        "mpv",
+        "--fullscreen",
+        "--script="
+        + os.path.join(os.path.expanduser("~/.config/videowall"), "player.lua"),
     ] + video_dirs
     os.execvp(mpv_cmd[0], mpv_cmd)
+
 
 if __name__ == "__main__":
     sys.exit(main())
