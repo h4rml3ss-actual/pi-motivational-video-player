@@ -1,0 +1,10 @@
+# VideoWall Python Dependencies
+# Core dependencies for configuration validation
+jsonschema>=4.0.0
+
+# Testing dependencies
+pytest>=6.0.0
+
+# Development dependencies (optional, for code quality)
+flake8>=4.0.0
+black>=22.0.0

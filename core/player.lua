@@ -17,7 +17,10 @@ local opts = {
     reload_key = "r",
 }
 options.read_options(opts, "player")
-opts.message_file = utils.expand_path(opts.message_file)
+-- Handle path expansion manually for compatibility
+if opts.message_file:sub(1,1) == "~" then
+    opts.message_file = os.getenv("HOME") .. opts.message_file:sub(2)
+end
 
 -- Seed random for message selection
 math.randomseed(os.time())
