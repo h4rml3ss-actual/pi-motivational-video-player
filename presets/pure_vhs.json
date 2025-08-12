@@ -2,7 +2,7 @@
   "name": "Pure VHS",
   "video_dirs": ["~/media/videos"],
   "playlist_mode": "random",
-  "effects": ["vhs-glitch"],
+  "effects": ["vhs-vibrant"],
   "messages": {
     "message_file": "~/.config/videowall/messages/default.txt",
     "interval": 30,

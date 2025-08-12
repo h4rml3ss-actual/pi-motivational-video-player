@@ -242,18 +242,34 @@ local function initialize()
             mp.msg.info("Applied cyberpunk-glitch effect with RGB separation")
 
         elseif effect == "vhs-glitch" then
-            -- VHS glitch: tracking errors, color distortion, static
+            -- VHS glitch: tracking errors, static, but keep vibrant colors
             local vhs_glitch_filter = table.concat({
-                "eq=brightness=0.1:contrast=1.3:saturation=0.4:gamma=1.2",  -- Washed out VHS
-                "hue=h=-20:s=0.7",  -- Warm, faded colors
-                "noise=alls=30:allf=t",  -- Heavy static
-                "scale=iw*0.95:ih:flags=bilinear",  -- Horizontal compression (tracking error)
-                "pad=iw*1.05:ih:(ow-iw)/2:0:color=black",  -- Add black bars
-                "drawbox=x=0:y=ih*0.3:w=iw:h=20:color=white@0.2:t=fill",  -- Static lines
-                "drawbox=x=0:y=ih*0.7:w=iw:h=15:color=white@0.15:t=fill"
+                "eq=brightness=0.2:contrast=1.4:saturation=1.3:gamma=1.0",  -- Keep colors vibrant
+                "hue=h=-5:s=1.1",  -- Slight warm tint but keep saturation
+                "noise=alls=25:allf=t",  -- VHS static
+                "scale=iw*0.96:ih:flags=bilinear",  -- Horizontal compression (tracking error)
+                "pad=iw*1.04:ih:(ow-iw)/2:0:color=black",  -- Add black bars
+                "drawbox=x=0:y=ih*0.25:w=iw:h=15:color=yellow@0.15:t=fill",  -- VHS static lines
+                "drawbox=x=0:y=ih*0.75:w=iw:h=12:color=white@0.1:t=fill",
+                "drawbox=x=iw*0.1:y=0:w=3:h=ih:color=magenta@0.1:t=fill"  -- Vertical tracking line
             }, ",")
             mp.set_property("vf", vhs_glitch_filter)
-            mp.msg.info("Applied vhs-glitch effect with tracking errors")
+            mp.msg.info("Applied vhs-glitch effect with vibrant colors")
+
+        elseif effect == "vhs-vibrant" then
+            -- VHS aesthetic but with enhanced colors instead of washed out
+            local vhs_vibrant_filter = table.concat({
+                "eq=brightness=0.3:contrast=1.6:saturation=1.8:gamma=0.9",  -- Enhanced, vibrant colors
+                "hue=h=5:s=1.2",  -- Slight warm enhancement
+                "noise=alls=20:allf=t",  -- Light VHS noise
+                "scale=iw*0.98:ih:flags=bilinear",  -- Slight softness
+                "pad=iw*1.02:ih:(ow-iw)/2:0:color=black",  -- Minimal border
+                "drawbox=x=0:y=ih*0.2:w=iw:h=8:color=cyan@0.08:t=fill",  -- Subtle scan lines
+                "drawbox=x=0:y=ih*0.5:w=iw:h=6:color=yellow@0.06:t=fill",
+                "drawbox=x=0:y=ih*0.8:w=iw:h=8:color=magenta@0.08:t=fill"
+            }, ",")
+            mp.set_property("vf", vhs_vibrant_filter)
+            mp.msg.info("Applied vhs-vibrant effect with enhanced colors")
         end
     end
 
