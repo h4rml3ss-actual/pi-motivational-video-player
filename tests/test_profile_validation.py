@@ -1,7 +1,6 @@
 """
 Tests for profile validation and schema compliance.
 """
-import json
 import os
 import tempfile
 import pytest

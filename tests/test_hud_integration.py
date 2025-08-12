@@ -5,9 +5,6 @@ import os
 import tempfile
 import subprocess
 import pytest
-import time
-import re
-from pathlib import Path
 
 
 class TestHudIntegration:
@@ -22,7 +19,6 @@ class TestHudIntegration:
     def temp_config_dir(self):
         """Create a temporary videowall config directory with HUD modules."""
         with tempfile.TemporaryDirectory() as temp_dir:
-            config_dir = os.path.join(temp_dir, ".config", "videowall")
             hud_dir = os.path.join(config_dir, "hud", "modules")
             os.makedirs(hud_dir, exist_ok=True)
             yield config_dir

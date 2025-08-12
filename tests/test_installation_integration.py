@@ -4,9 +4,7 @@ Integration tests for the complete installation process.
 import os
 import tempfile
 import subprocess
-import json
 import pytest
-from pathlib import Path
 
 
 class TestInstallationIntegration:
@@ -36,7 +34,6 @@ class TestInstallationIntegration:
 
     def test_postinstall_creates_directory_structure(self, temp_home, project_root):
         """Test that postinstall creates the correct directory structure."""
-        config_dir = os.path.join(temp_home, ".config", "videowall")
         script_path = os.path.join(project_root, "installers", "postinstall.sh")
 
         # Set HOME environment variable to our temp directory
@@ -77,7 +74,6 @@ class TestInstallationIntegration:
 
     def test_postinstall_copies_core_files(self, temp_home, project_root):
         """Test that postinstall copies all required core files."""
-        config_dir = os.path.join(temp_home, ".config", "videowall")
         script_path = os.path.join(project_root, "installers", "postinstall.sh")
 
         env = os.environ.copy()
@@ -125,7 +121,6 @@ class TestInstallationIntegration:
 
     def test_postinstall_copies_profiles(self, temp_home, project_root):
         """Test that postinstall copies profile configurations."""
-        config_dir = os.path.join(temp_home, ".config", "videowall")
         script_path = os.path.join(project_root, "installers", "postinstall.sh")
 
         env = os.environ.copy()
@@ -163,7 +158,6 @@ class TestInstallationIntegration:
 
     def test_postinstall_sets_correct_permissions(self, temp_home, project_root):
         """Test that postinstall sets correct file permissions."""
-        config_dir = os.path.join(temp_home, ".config", "videowall")
         script_path = os.path.join(project_root, "installers", "postinstall.sh")
 
         env = os.environ.copy()
@@ -204,7 +198,6 @@ class TestInstallationIntegration:
 
     def test_postinstall_handles_existing_installation(self, temp_home, project_root):
         """Test that postinstall handles existing installation correctly."""
-        config_dir = os.path.join(temp_home, ".config", "videowall")
         script_path = os.path.join(project_root, "installers", "postinstall.sh")
 
         # Create existing config directory
@@ -247,7 +240,6 @@ class TestInstallationIntegration:
 
     def test_installed_profiles_are_valid(self, temp_home, project_root):
         """Test that all installed profiles are valid JSON and conform to schema."""
-        config_dir = os.path.join(temp_home, ".config", "videowall")
         script_path = os.path.join(project_root, "installers", "postinstall.sh")
 
         env = os.environ.copy()
@@ -305,7 +297,6 @@ class TestInstallationIntegration:
 
     def test_installation_validation_function(self, temp_home, project_root):
         """Test that the installation validation function works correctly."""
-        config_dir = os.path.join(temp_home, ".config", "videowall")
         script_path = os.path.join(project_root, "installers", "postinstall.sh")
 
         env = os.environ.copy()
@@ -373,5 +364,5 @@ class TestInstallationIntegration:
             # Restore permissions for cleanup
             try:
                 os.chmod(config_parent, 0o755)
-            except:
+            except Exception:
                 pass

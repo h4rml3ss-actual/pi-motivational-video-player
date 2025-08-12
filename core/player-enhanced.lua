@@ -351,3 +351,4 @@ mp.register_event("file-loaded", initialize)
 
 -- Seed random for message selection
 math.randomseed(os.time())
+

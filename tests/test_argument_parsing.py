@@ -37,7 +37,6 @@ class TestVideoWallArgumentParsing:
 
         # Create a temporary config to allow the executable to run
         with tempfile.TemporaryDirectory() as temp_dir:
-            config_dir = os.path.join(temp_dir, ".config", "videowall")
             os.makedirs(config_dir, exist_ok=True)
 
             # Create minimal config file
@@ -182,7 +181,6 @@ class TestVideoWallLauncherBehavior:
         launcher_path = os.path.join(project_root, "bin", "videowall-launcher")
 
         with tempfile.TemporaryDirectory() as temp_dir:
-            config_dir = os.path.join(temp_dir, ".config", "videowall")
             profiles_dir = os.path.join(config_dir, "profiles")
 
             # Create empty profiles directory
@@ -216,7 +214,6 @@ class TestVideoWallLauncherBehavior:
     def test_directory_creation_logic(self):
         """Test the directory creation logic used by the launcher."""
         with tempfile.TemporaryDirectory() as temp_dir:
-            config_dir = os.path.join(temp_dir, ".config", "videowall")
             profiles_dir = os.path.join(config_dir, "profiles")
 
             # Test os.makedirs with exist_ok=True

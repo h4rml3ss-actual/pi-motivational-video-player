@@ -1,11 +1,9 @@
 """
 Tests for configuration loading functionality in VideoWall executables.
 """
-import json
 import os
 import tempfile
 import pytest
-import sys
 
 # Add bin directory to path for importing modules
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))

@@ -4,10 +4,7 @@ Integration tests for mpv Lua module loading and functionality.
 import os
 import tempfile
 import subprocess
-import json
 import pytest
-import time
-from pathlib import Path
 
 
 class TestMpvLuaIntegration:
@@ -17,7 +14,6 @@ class TestMpvLuaIntegration:
     def temp_config_dir(self):
         """Create a temporary videowall config directory."""
         with tempfile.TemporaryDirectory() as temp_dir:
-            config_dir = os.path.join(temp_dir, ".config", "videowall")
             os.makedirs(config_dir, exist_ok=True)
             yield config_dir
 

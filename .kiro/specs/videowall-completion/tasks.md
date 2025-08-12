@@ -51,3 +51,11 @@
   - Add mpv configuration for proper CRT/HDMI output
   - Test complete video playback workflow
   - _Requirements: 1.1, 1.2, 4.1, 4.2_
+
+- [x] 8. Implement HUD modules and visual effects system
+  - Enhance player.lua to load and display HUD modules from profile configuration
+  - Add cyberpunk-style visual styling with colors and positioning
+  - Implement video effects system (cyberpunk-glow, vhs-clean)
+  - Create proper ASS subtitle rendering for HUD elements
+  - Position HUD modules around the screen edges as specified in profiles
+  - _Requirements: 4.1, 4.2, 4.3_
