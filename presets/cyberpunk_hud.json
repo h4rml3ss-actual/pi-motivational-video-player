@@ -2,7 +2,7 @@
   "name": "Cyberpunk HUD",
   "video_dirs": ["~/media/videos"],
   "playlist_mode": "ordered",
-  "effects": ["cyberpunk-glow"],
+  "effects": ["cyberpunk-glitch"],
   "messages": {
     "message_file": "~/.config/videowall/messages/default.txt",
     "interval": 60,
